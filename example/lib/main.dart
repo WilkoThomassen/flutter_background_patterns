@@ -14,8 +14,8 @@ class ExampleBackgroundPatterns extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
         home: Scaffold(
-      //body: ConfigureBackgroundPattern(),
-      body: CustomBackgroundPattern(),
+      body: ConfigureBackgroundPattern(),
+      // body: CustomBackgroundPattern(),
     ));
   }
 }
