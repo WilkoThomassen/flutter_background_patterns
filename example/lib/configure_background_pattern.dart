@@ -17,12 +17,24 @@ class ConfigureBackgroundPatternState extends State<ConfigureBackgroundPattern> 
 
   @override
   Widget build(BuildContext context) {
+    // star shape
+    List<Offset> customStarPath = [];
+
+    // build up a star
+    customStarPath.add(Offset(_shapeSize / 2, 0));
+    customStarPath.add(Offset(_shapeSize, _shapeSize));
+    customStarPath.add(Offset(0, _shapeSize / 3));
+    customStarPath.add(Offset(_shapeSize, _shapeSize / 3));
+    customStarPath.add(Offset(0, _shapeSize));
+    customStarPath.add(Offset(_shapeSize / 2, 0));
+
     return PatternContainer(
         shapeSize: _shapeSize,
         perspective: _perspective,
         shapeDepth: _shapeDepth,
         containerDepth: _containerDepth,
-        shapes: const [Shape.polygon, Shape.polygonOutlined],
+        customPath: customStarPath,
+        shapes: const [Shape.polygon, Shape.polygonOutlined, Shape.square, Shape.squareOutlined, Shape.custom, Shape.customOutlined],
         margin: _margin,
         shapeColor: Colors.black12,
         child: Padding(

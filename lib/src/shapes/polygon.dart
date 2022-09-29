@@ -47,10 +47,7 @@ class Polygon extends StatelessWidget {
     var angle = (pi * 2) / sides;
     final shapeSize = size / 2;
     final radius = shapeSize;
-    final center = shapeSize / 2;
-
-    // ensure x and y locations are not negative because it will distort depth and perspective
-    final ensurePositiveCorrection = shapeSize / 2;
+    final center = size / 2;
 
     // build up a polygon
     Offset startPoint = Offset(radius * cos(radians) + center, radius * sin(radians) + center);

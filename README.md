@@ -11,29 +11,85 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+A Flutter package for making widgets with a pattern in the background
+
+## Preview
+
+![The example app screen](https://github.com/WilkoThomassen/flutter_background_patterns/assets/preview/preview-background-patterns-screen.png)
+
+![The example app running](https://github.com/WilkoThomassen/flutter_background_patterns/assets/preview/preview-background-patterns-video.mov)
+
+![The example app in game](https://github.com/WilkoThomassen/flutter_background_patterns/assets/preview/background-patterns-game.sample.png)
+
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+* Implement a pattern container in any widget
+* Shape can be a package default shape (square, triangle, hexagon)
+* Shape can be a custom shape where the custom path should be provided
+* Several different shapes can be combined in the container
+* Shape size, depth, perspective can be set
+* Perspective in container can be set and margins between shapes
+    
+## Install
+
+In the `pubspec.yaml` of your flutter project, add the following dependency:
+
+```yaml
+dependencies:
+  background_patterns: <latest_version>
+```
+
+In your library add the following import:
+
+```dart
+import 'package:background_patterns/background_patterns.dart';
+```
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Example: 
 
-## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+
+## Basic Usage 
 
 ```dart
-const like = 'sample';
+
+return PatternContainer(
+        shapeSize: 40,
+        perspective: 0.8,
+        shapeDepth: 0.5,
+        containerDepth: 0.2,
+        shapes: const [Shape.square],
+        shapeColor: Colors.black);
+
 ```
 
-## Additional information
+## Custom shapes 
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+
+List<Offset> customStarPath = [];
+
+double shapeSize = 120;
+
+// build up a star
+customStarPath.add(Offset(shapeSize / 2, 0));
+customStarPath.add(Offset(shapeSize, shapeSize));
+customStarPath.add(Offset(0, shapeSize / 3));
+customStarPath.add(Offset(shapeSize, shapeSize / 3));
+customStarPath.add(Offset(0, shapeSize));
+customStarPath.add(Offset(shapeSize / 2, 0));
+
+return PatternContainer(
+        shapeSize: 40,
+        perspective: 0.2,
+        shapeDepth: 0.1,
+        containerDepth: 0.2,
+        customPath: customStarPath,
+        shapes: const [Shape.customOutlined],
+        shapeColor: Colors.black);
+
+```
+

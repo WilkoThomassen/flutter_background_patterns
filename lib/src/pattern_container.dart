@@ -74,6 +74,15 @@ class PatternContainer extends StatelessWidget {
           offset: shapeOffset,
           isOutlined: true,
         );
+      case Shape.custom:
+        return Custom(
+            size: rowShapeSize,
+            originalSize: shapeSize,
+            color: shapeColor,
+            depth: shapeDepth,
+            perspective: perspective,
+            offset: shapeOffset,
+            customPath: customPath!);
       case Shape.customOutlined:
         return Custom(
             size: rowShapeSize,
@@ -82,6 +91,7 @@ class PatternContainer extends StatelessWidget {
             depth: shapeDepth,
             perspective: perspective,
             offset: shapeOffset,
+            isOutlined: true,
             customPath: customPath!);
       default:
         return Container();
