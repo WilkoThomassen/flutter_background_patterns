@@ -15,9 +15,11 @@ A Flutter package for making widgets with a pattern in the background
 
 ## Preview
 
-![The example app screen](https://github.com/WilkoThomassen/flutter_background_patterns/blob/feature/setup-flutter-package-deliverables/assets/preview/preview-background-patterns-screen.png)
+Features
 
 ![The example app running](https://github.com/WilkoThomassen/flutter_background_patterns/blob/feature/setup-flutter-package-deliverables/assets/preview/preview-background-patterns-video.gif)
+
+Example
 
 ![The example app in game](https://github.com/WilkoThomassen/flutter_background_patterns/blob/feature/setup-flutter-package-deliverables/assets/preview/background-patterns-game-sample.png)
 
