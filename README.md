@@ -54,7 +54,7 @@ Example:
 
 
 
-## Basic Usage 
+## Basic usage 
 
 ```dart
 

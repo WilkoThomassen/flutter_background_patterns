@@ -13,7 +13,13 @@ class PatternContainer extends StatelessWidget {
   final double shapeDepth;
   final double containerDepth;
   final double perspective;
+
+  /// margin between shapes on a row
   final double margin;
+
+  /// sets the shape aligned vertically
+  final bool alignShapesVertical;
+
   final List<Offset>? customPath;
 
   const PatternContainer(
@@ -26,7 +32,8 @@ class PatternContainer extends StatelessWidget {
       this.shapeSize = 30,
       this.shapeDepth = 0,
       this.containerDepth = 0,
-      this.perspective = 0});
+      this.perspective = 0,
+      this.alignShapesVertical = false});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +61,11 @@ class PatternContainer extends StatelessWidget {
   }
 
   Widget _getShape(int rowIndex, int columnIndex, double rowShapeSize) {
-    final Offset shapeOffset = Offset((margin + columnIndex * (rowShapeSize + margin) - shapeSize), rowIndex * (rowShapeSize + margin));
+    // this margin sets a space for every uneven row to ensure that shapes are not aligned vertically
+
+    final double unAlignVerticalMargin = rowIndex % 2 == 0 ? rowShapeSize / 2 : 0;
+    final Offset shapeOffset =
+        Offset((margin + unAlignVerticalMargin + columnIndex * (rowShapeSize + margin) - shapeSize), rowIndex * (rowShapeSize + margin));
     final shapeIndex = columnIndex % shapes.length;
     Shape shape = shapes[shapeIndex];
 
