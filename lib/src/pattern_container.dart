@@ -7,19 +7,36 @@ enum Shape { square, squareOutlined, polygon, polygonOutlined, custom, customOut
 
 class PatternContainer extends StatelessWidget {
   final Widget child;
+
+  /// the shapes that are rendered on the background
+  /// a minimum of 1 shape must be set
   final List<Shape> shapes;
   final Color shapeColor;
   final double shapeSize;
+
+  /// the top-to-bottom depth creating a depth look on the shape
+  /// min: 0 (no depth) max: 1 (max depth)
   final double shapeDepth;
+
+  /// the top-to-bottom depth inside the container which set upper shapes smaller than lower shapes
+  /// min: 0 (no depth) max: 1 (max depth)
   final double containerDepth;
+
+  /// the left-to-right perspective creating a perspective look on the shape
+  /// only has effect when there is also depth
+  /// min: -1 (perspective most from the left)
+  /// max: 1 (perspective most from the right)
   final double perspective;
 
   /// margin between shapes on a row
   final double margin;
 
   /// sets the shape aligned vertically
+  /// when false, the uneven rows will start with a half-shape margin
   final bool alignShapesVertical;
 
+  /// sets the shape path of the customshape
+  /// at least 'custom' or 'customOutlined' should be set in the shapes parameter
   final List<Offset>? customPath;
 
   const PatternContainer(
@@ -63,7 +80,7 @@ class PatternContainer extends StatelessWidget {
   Widget _getShape(int rowIndex, int columnIndex, double rowShapeSize) {
     // this margin sets a space for every uneven row to ensure that shapes are not aligned vertically
 
-    final double unAlignVerticalMargin = rowIndex % 2 == 0 ? rowShapeSize / 2 : 0;
+    final double unAlignVerticalMargin = !alignShapesVertical && rowIndex % 2 == 0 ? rowShapeSize / 2 : 0;
     final Offset shapeOffset =
         Offset((margin + unAlignVerticalMargin + columnIndex * (rowShapeSize + margin) - shapeSize), rowIndex * (rowShapeSize + margin));
     final shapeIndex = columnIndex % shapes.length;

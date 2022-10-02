@@ -54,7 +54,17 @@ Example:
 
 
 
-## Basic usage 
+## Minimal usage 
+
+```dart
+
+return PatternContainer(
+        shapes: const [Shape.square],
+        shapeColor: Colors.black);
+
+```
+
+## Configure usage 
 
 ```dart
 
@@ -63,8 +73,9 @@ return PatternContainer(
         perspective: 0.8,
         shapeDepth: 0.5,
         containerDepth: 0.2,
+        alignShapesVertical: true,
         shapes: const [Shape.square],
-        shapeColor: Colors.black);
+        shapeColor: Colors.green);
 
 ```
 
@@ -85,10 +96,6 @@ customStarPath.add(Offset(0, shapeSize));
 customStarPath.add(Offset(shapeSize / 2, 0));
 
 return PatternContainer(
-        shapeSize: 40,
-        perspective: 0.2,
-        shapeDepth: 0.1,
-        containerDepth: 0.2,
         customPath: customStarPath,
         shapes: const [Shape.customOutlined],
         shapeColor: Colors.black);
