@@ -14,6 +14,17 @@ void main() {
     expect(const Offset(80, 75).withDepth(depth: 0.6, size: 100), const Offset(72.5, 75.0));
   });
 
+  test('basic perspective tests', () {
+    expect(const Offset(0, 0).withPerspective(perspective: 1, size: 100), const Offset(100.0, 0.0));
+    expect(const Offset(0, 25).withPerspective(perspective: 1, size: 100), const Offset(75.0, 25.0));
+
+    expect(const Offset(80, 0).withPerspective(perspective: 1, size: 100), const Offset(180.0, 0.0));
+    expect(const Offset(80, 75).withPerspective(perspective: 1, size: 100), const Offset(105.0, 75.0));
+
+    expect(const Offset(80, 0).withPerspective(perspective: 0.6, size: 100), const Offset(140.0, 0.0));
+    expect(const Offset(80, 75).withPerspective(perspective: 0.6, size: 100), const Offset(95.0, 75.0));
+  });
+
   test('basic container depth', () {
     expect(80.0.withContainerDepth(depth: 0, row: 1, rows: 8), 80);
     expect(80.0.withContainerDepth(depth: 0, row: 7, rows: 8), 80);
