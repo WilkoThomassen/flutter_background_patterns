@@ -1,4 +1,4 @@
-import 'package:background_patterns/src/extensions/shape_point_location_extension.dart';
+import 'package:background_patterns/extensions/shape_point_location_extension.dart';
 import 'package:flutter/material.dart';
 
 class BaseShapePainter extends CustomPainter {

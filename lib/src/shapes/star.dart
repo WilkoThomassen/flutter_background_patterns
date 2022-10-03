@@ -1,10 +1,12 @@
 import 'dart:math';
 
+import 'package:background_patterns/extensions/shape_path_extension.dart';
 import 'package:background_patterns/src/painters/base_shape_painter.dart';
 import 'package:flutter/material.dart';
 
 class Star extends StatelessWidget {
   final double size;
+  final double originalSize;
 
   final Color color;
 
@@ -27,6 +29,7 @@ class Star extends StatelessWidget {
   const Star(
       {super.key,
       required this.size,
+      required this.originalSize,
       required this.color,
       required this.depth,
       this.perspective = 0,
@@ -44,7 +47,7 @@ class Star extends StatelessWidget {
     const int angleOffsetToCenter = 0;
     final double center = size / 2;
 
-    List<Offset> shapePointLocations = [];
+    List<Offset> shapePath = [];
     var angle = pi / innerCirclePoints;
 
     // build up a the star
@@ -55,19 +58,17 @@ class Star extends StatelessWidget {
       var radius = i % 2 == 0 ? outerRadius : innerRadius;
       var x = center + cos(i * angle + angleOffsetToCenter - 0.3) * radius;
       var y = center + sin(i * angle + angleOffsetToCenter - 0.3) * radius;
-      shapePointLocations.add(Offset(x, y));
+      shapePath.add(Offset(x, y));
     }
+
+    // resize for container depth (only if container depth is active)
+    List<Offset> starPath = originalSize != size ? shapePath.resizeAll(originalSize: originalSize, transformSize: size) : shapePath;
 
     return CustomPaint(
         painter: isOutlined
             ? BaseShapePainter.stroke(
-                shapeSize: size, shapeOffset: offset, depth: depth, perspective: perspective, color: color, shapePointLocations: shapePointLocations)
+                shapeSize: size, shapeOffset: offset, depth: depth, perspective: perspective, color: color, shapePointLocations: starPath)
             : BaseShapePainter(
-                shapeSize: size,
-                shapeOffset: offset,
-                depth: depth,
-                perspective: perspective,
-                color: color,
-                shapePointLocations: shapePointLocations));
+                shapeSize: size, shapeOffset: offset, depth: depth, perspective: perspective, color: color, shapePointLocations: starPath));
   }
 }

@@ -104,9 +104,16 @@ class PatternContainer extends StatelessWidget {
           isOutlined: true,
         );
       case Shape.star:
-        return Star(size: rowShapeSize, color: shapeColor, depth: shapeDepth, perspective: perspective, offset: shapeOffset);
+        return Star(size: rowShapeSize, originalSize: shapeSize, color: shapeColor, depth: shapeDepth, perspective: perspective, offset: shapeOffset);
       case Shape.starOutlined:
-        return Star(size: rowShapeSize, color: shapeColor, depth: shapeDepth, perspective: perspective, offset: shapeOffset, isOutlined: true);
+        return Star(
+            size: rowShapeSize,
+            originalSize: shapeSize,
+            color: shapeColor,
+            depth: shapeDepth,
+            perspective: perspective,
+            offset: shapeOffset,
+            isOutlined: true);
       case Shape.custom:
         return Custom(
             size: rowShapeSize,

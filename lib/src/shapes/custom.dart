@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:background_patterns/extensions/shape_path_extension.dart';
 import 'package:background_patterns/src/painters/base_shape_painter.dart';
 import 'package:flutter/material.dart';
 
@@ -39,13 +40,8 @@ class Custom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // transform custom path to resized custom path
-    double resizeFactor = size / originalSize;
-    List<Offset> resizedCustomPath = [];
-
-    for (final point in customPath) {
-      resizedCustomPath.add(Offset(point.dx * resizeFactor, point.dy * resizeFactor));
-    }
+    // resize for container depth (only if container depth is active)
+    List<Offset> resizedCustomPath = originalSize != size ? customPath.resizeAll(originalSize: originalSize, transformSize: size) : customPath;
 
     return CustomPaint(
         painter: isOutlined

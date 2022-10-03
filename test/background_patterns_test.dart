@@ -1,5 +1,5 @@
 import 'package:background_patterns/background_patterns.dart';
-import 'package:background_patterns/src/extensions/shape_point_location_extension.dart';
+import 'package:background_patterns/extensions/shape_point_location_extension.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
