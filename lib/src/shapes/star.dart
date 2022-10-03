@@ -35,6 +35,7 @@ class Star extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: not scaling properly on container depth
     // TODO: make these constants configurable for pattern container
     const int innerCirclePoints = 5;
     const int innerRadius = 25;
