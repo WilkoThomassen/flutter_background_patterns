@@ -23,8 +23,8 @@ class CustomBackgroundPatternState extends State<CustomBackgroundPattern> {
     // build up a star
     customStarPath.add(Offset(_shapeSize / 2, 0));
     customStarPath.add(Offset(_shapeSize, _shapeSize));
-    customStarPath.add(Offset(0, _shapeSize / 3));
-    customStarPath.add(Offset(_shapeSize, _shapeSize / 3));
+    customStarPath.add(Offset(0, _shapeSize / 2.8));
+    customStarPath.add(Offset(_shapeSize, _shapeSize / 2.8));
     customStarPath.add(Offset(0, _shapeSize));
     customStarPath.add(Offset(_shapeSize / 2, 0));
 

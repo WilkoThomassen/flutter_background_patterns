@@ -35,15 +35,27 @@ class Star extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Offset> shapePointLocations = [];
+    // TODO: make these constants configurable for pattern container
+    const int innerCirclePoints = 5;
+    const int innerRadius = 25;
+    const int innerOuterRadiusRatio = 2;
+    const int outerRadius = innerRadius * innerOuterRadiusRatio;
+    const int angleOffsetToCenter = 0;
+    final double center = size / 2;
 
-    // build up a star
-    shapePointLocations.add(Offset(size / 2, 0));
-    shapePointLocations.add(Offset(size, size));
-    shapePointLocations.add(Offset(0, size / 3));
-    shapePointLocations.add(Offset(size, size / 3));
-    shapePointLocations.add(Offset(0, size));
-    shapePointLocations.add(Offset(size / 2, 0));
+    List<Offset> shapePointLocations = [];
+    var angle = pi / innerCirclePoints;
+
+    // build up a the star
+
+    // number of points are sum of inner and outer points
+    var points = 1 + innerCirclePoints * 2;
+    for (int i = 0; i < points; i++) {
+      var radius = i % 2 == 0 ? outerRadius : innerRadius;
+      var x = center + cos(i * angle + angleOffsetToCenter - 0.3) * radius;
+      var y = center + sin(i * angle + angleOffsetToCenter - 0.3) * radius;
+      shapePointLocations.add(Offset(x, y));
+    }
 
     return CustomPaint(
         painter: isOutlined

@@ -1,9 +1,10 @@
 import 'package:background_patterns/src/shapes/custom.dart';
 import 'package:background_patterns/src/shapes/polygon.dart';
 import 'package:background_patterns/src/shapes/square.dart';
+import 'package:background_patterns/src/shapes/star.dart';
 import 'package:flutter/material.dart';
 
-enum Shape { square, squareOutlined, polygon, polygonOutlined, custom, customOutlined }
+enum Shape { square, squareOutlined, polygon, polygonOutlined, star, starOutlined, custom, customOutlined }
 
 class PatternContainer extends StatelessWidget {
   final Widget child;
@@ -102,6 +103,10 @@ class PatternContainer extends StatelessWidget {
           offset: shapeOffset,
           isOutlined: true,
         );
+      case Shape.star:
+        return Star(size: rowShapeSize, color: shapeColor, depth: shapeDepth, perspective: perspective, offset: shapeOffset);
+      case Shape.starOutlined:
+        return Star(size: rowShapeSize, color: shapeColor, depth: shapeDepth, perspective: perspective, offset: shapeOffset, isOutlined: true);
       case Shape.custom:
         return Custom(
             size: rowShapeSize,
