@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:background_patterns/extensions/shape_path_extension.dart';
 import 'package:background_patterns/src/painters/base_shape_painter.dart';
+import 'package:background_patterns/src/shapes/shape_configs.dart';
 import 'package:flutter/material.dart';
 
 class Star extends StatelessWidget {
@@ -23,8 +24,8 @@ class Star extends StatelessWidget {
   /// the location of the shape in its parent
   final Offset offset;
 
-  /// determines whether the shape is filled or outlined
-  final bool isOutlined;
+  /// determines variables of the shape
+  final StarConfig config;
 
   const Star(
       {super.key,
@@ -32,32 +33,26 @@ class Star extends StatelessWidget {
       required this.originalSize,
       required this.color,
       required this.depth,
+      required this.config,
       this.perspective = 0,
-      this.offset = Offset.zero,
-      this.isOutlined = false});
+      this.offset = Offset.zero});
 
   @override
   Widget build(BuildContext context) {
-    // TODO: not scaling properly on container depth
-    // TODO: make these constants configurable for pattern container
-    const int innerCirclePoints = 5;
-    const int innerRadius = 25;
-    const int innerOuterRadiusRatio = 2;
-    const int outerRadius = innerRadius * innerOuterRadiusRatio;
-    const int angleOffsetToCenter = 0;
+    int outerRadius = config.innerRadius * config.innerOuterRadiusRatio;
     final double center = size / 2;
 
     List<Offset> shapePath = [];
-    var angle = pi / innerCirclePoints;
+    var angle = pi / config.innerCirclePoints;
 
     // build up a the star
 
     // number of points are sum of inner and outer points
-    var points = 1 + innerCirclePoints * 2;
+    var points = 1 + config.innerCirclePoints * 2;
     for (int i = 0; i < points; i++) {
-      var radius = i % 2 == 0 ? outerRadius : innerRadius;
-      var x = center + cos(i * angle + angleOffsetToCenter - 0.3) * radius;
-      var y = center + sin(i * angle + angleOffsetToCenter - 0.3) * radius;
+      var radius = i % 2 == 0 ? outerRadius : config.innerRadius;
+      var x = center + cos(i * angle + config.angleOffsetToCenter - 0.3) * radius;
+      var y = center + sin(i * angle + config.angleOffsetToCenter - 0.3) * radius;
       shapePath.add(Offset(x, y));
     }
 
@@ -65,7 +60,7 @@ class Star extends StatelessWidget {
     List<Offset> starPath = originalSize != size ? shapePath.resizeAll(originalSize: originalSize, transformSize: size) : shapePath;
 
     return CustomPaint(
-        painter: isOutlined
+        painter: config.isOutlined
             ? BaseShapePainter.stroke(
                 shapeSize: size, shapeOffset: offset, depth: depth, perspective: perspective, color: color, shapePointLocations: starPath)
             : BaseShapePainter(

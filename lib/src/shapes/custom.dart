@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:background_patterns/extensions/shape_path_extension.dart';
 import 'package:background_patterns/src/painters/base_shape_painter.dart';
+import 'package:background_patterns/src/shapes/shape_configs.dart';
 import 'package:flutter/material.dart';
 
 class Custom extends StatelessWidget {
@@ -23,9 +24,7 @@ class Custom extends StatelessWidget {
   /// the location of the shape in its parent
   final Offset offset;
 
-  /// determines whether the shape is filled or outlined
-  final bool isOutlined;
-  final List<Offset> customPath;
+  final CustomConfig config;
 
   const Custom(
       {super.key,
@@ -33,18 +32,18 @@ class Custom extends StatelessWidget {
       required this.originalSize,
       required this.color,
       required this.depth,
-      required this.customPath,
+      required this.config,
       this.perspective = 0,
-      this.offset = Offset.zero,
-      this.isOutlined = false});
+      this.offset = Offset.zero});
 
   @override
   Widget build(BuildContext context) {
     // resize for container depth (only if container depth is active)
-    List<Offset> resizedCustomPath = originalSize != size ? customPath.resizeAll(originalSize: originalSize, transformSize: size) : customPath;
+    List<Offset> resizedCustomPath =
+        originalSize != size ? config.customPath.resizeAll(originalSize: originalSize, transformSize: size) : config.customPath;
 
     return CustomPaint(
-        painter: isOutlined
+        painter: config.isOutlined
             ? BaseShapePainter.stroke(
                 shapeSize: size, shapeOffset: offset, depth: depth, perspective: perspective, color: color, shapePointLocations: resizedCustomPath)
             : BaseShapePainter(

@@ -33,7 +33,7 @@ class CustomBackgroundPatternState extends State<CustomBackgroundPattern> {
         perspective: _perspective,
         shapeDepth: _shapeDepth,
         containerDepth: _containerDepth,
-        shapes: const [Shape.custom, Shape.customOutlined],
+        shapes: [CustomConfig(customPath: customStarPath), CustomConfig(customPath: customStarPath, isOutlined: true)],
         customPath: customStarPath,
         margin: _margin,
         shapeColor: Colors.black12,

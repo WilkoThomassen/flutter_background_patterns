@@ -1,4 +1,5 @@
 import 'package:background_patterns/src/painters/base_shape_painter.dart';
+import 'package:background_patterns/src/shapes/shape_configs.dart';
 import 'package:flutter/material.dart';
 
 class Square extends StatelessWidget {
@@ -19,17 +20,17 @@ class Square extends StatelessWidget {
   /// the location of the shape in its parent
   final Offset offset;
 
-  /// determines whether the shape is filled or outlined
-  final bool isOutlined;
+  final SquareConfig config;
 
-  const Square(
-      {super.key,
-      required this.size,
-      required this.color,
-      required this.depth,
-      this.perspective = 0,
-      this.offset = Offset.zero,
-      this.isOutlined = false});
+  const Square({
+    super.key,
+    required this.size,
+    required this.color,
+    required this.depth,
+    required this.config,
+    this.perspective = 0,
+    this.offset = Offset.zero,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class Square extends StatelessWidget {
     ]);
 
     return CustomPaint(
-        painter: isOutlined
+        painter: config.isOutlined
             ? BaseShapePainter.stroke(
                 shapeSize: size, shapeOffset: offset, depth: depth, perspective: perspective, color: color, shapePointLocations: shapePointLocations)
             : BaseShapePainter(

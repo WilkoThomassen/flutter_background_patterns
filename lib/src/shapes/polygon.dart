@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:background_patterns/src/painters/base_shape_painter.dart';
+import 'package:background_patterns/src/shapes/shape_configs.dart';
 import 'package:flutter/material.dart';
 
 class Polygon extends StatelessWidget {
@@ -21,30 +22,25 @@ class Polygon extends StatelessWidget {
   /// the location of the shape in its parent
   final Offset offset;
 
-  /// determines whether the shape is filled or outlined
-  final bool isOutlined;
-
-  // the amount of sides on the polygon, defaults to 6
-  final int sides;
-
   // the radians in which the polygon is rotated
   final double radians;
+
+  final PolygonConfig config;
 
   const Polygon(
       {super.key,
       required this.size,
       required this.color,
       required this.depth,
-      this.sides = 6,
+      required this.config,
       this.radians = 0,
       this.perspective = 0,
-      this.offset = Offset.zero,
-      this.isOutlined = false});
+      this.offset = Offset.zero});
 
   @override
   Widget build(BuildContext context) {
     List<Offset> shapePointLocations = [];
-    var angle = (pi * 2) / sides;
+    var angle = (pi * 2) / config.sides;
     final shapeSize = size / 2;
     final radius = shapeSize;
     final center = size / 2;
@@ -52,14 +48,14 @@ class Polygon extends StatelessWidget {
     // build up a polygon
     Offset startPoint = Offset(radius * cos(radians) + center, radius * sin(radians) + center);
     shapePointLocations.add(startPoint);
-    for (int i = 1; i <= sides; i++) {
+    for (int i = 1; i <= config.sides; i++) {
       double x = radius * cos(radians + angle * i) + center;
       double y = radius * sin(radians + angle * i) + center;
       shapePointLocations.add(Offset(x, y));
     }
 
     return CustomPaint(
-        painter: isOutlined
+        painter: config.isOutlined
             ? BaseShapePainter.stroke(
                 shapeSize: shapeSize,
                 shapeOffset: offset,

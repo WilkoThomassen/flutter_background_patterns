@@ -1,17 +1,16 @@
 import 'package:background_patterns/src/shapes/custom.dart';
 import 'package:background_patterns/src/shapes/polygon.dart';
+import 'package:background_patterns/src/shapes/shape_configs.dart';
 import 'package:background_patterns/src/shapes/square.dart';
 import 'package:background_patterns/src/shapes/star.dart';
 import 'package:flutter/material.dart';
-
-enum Shape { square, squareOutlined, polygon, polygonOutlined, star, starOutlined, custom, customOutlined }
 
 class PatternContainer extends StatelessWidget {
   final Widget child;
 
   /// the shapes that are rendered on the background
   /// a minimum of 1 shape must be set
-  final List<Shape> shapes;
+  final List<BaseShapeConfig> shapes;
   final Color shapeColor;
   final double shapeSize;
 
@@ -85,57 +84,35 @@ class PatternContainer extends StatelessWidget {
     final Offset shapeOffset =
         Offset((margin + unAlignVerticalMargin + columnIndex * (rowShapeSize + margin) - shapeSize), rowIndex * (rowShapeSize + margin));
     final shapeIndex = columnIndex % shapes.length;
-    Shape shape = shapes[shapeIndex];
+    BaseShapeConfig shapeConfig = shapes[shapeIndex];
 
-    switch (shape) {
-      case Shape.square:
-        return Square(size: rowShapeSize, color: shapeColor, depth: shapeDepth, perspective: perspective, offset: shapeOffset);
-      case Shape.squareOutlined:
-        return Square(size: rowShapeSize, color: shapeColor, depth: shapeDepth, perspective: perspective, offset: shapeOffset, isOutlined: true);
-      case Shape.polygon:
-        return Polygon(size: rowShapeSize, color: shapeColor, depth: shapeDepth, perspective: perspective, offset: shapeOffset);
-      case Shape.polygonOutlined:
-        return Polygon(
+    if (shapeConfig is SquareConfig) {
+      return Square(size: rowShapeSize, color: shapeColor, depth: shapeDepth, perspective: perspective, offset: shapeOffset, config: shapeConfig);
+    }
+    if (shapeConfig is PolygonConfig) {
+      return Polygon(size: rowShapeSize, color: shapeColor, depth: shapeDepth, perspective: perspective, offset: shapeOffset, config: shapeConfig);
+    }
+    if (shapeConfig is StarConfig) {
+      return Star(
           size: rowShapeSize,
+          originalSize: shapeSize,
           color: shapeColor,
           depth: shapeDepth,
           perspective: perspective,
           offset: shapeOffset,
-          isOutlined: true,
-        );
-      case Shape.star:
-        return Star(size: rowShapeSize, originalSize: shapeSize, color: shapeColor, depth: shapeDepth, perspective: perspective, offset: shapeOffset);
-      case Shape.starOutlined:
-        return Star(
-            size: rowShapeSize,
-            originalSize: shapeSize,
-            color: shapeColor,
-            depth: shapeDepth,
-            perspective: perspective,
-            offset: shapeOffset,
-            isOutlined: true);
-      case Shape.custom:
-        return Custom(
-            size: rowShapeSize,
-            originalSize: shapeSize,
-            color: shapeColor,
-            depth: shapeDepth,
-            perspective: perspective,
-            offset: shapeOffset,
-            customPath: customPath!);
-      case Shape.customOutlined:
-        return Custom(
-            size: rowShapeSize,
-            originalSize: shapeSize,
-            color: shapeColor,
-            depth: shapeDepth,
-            perspective: perspective,
-            offset: shapeOffset,
-            isOutlined: true,
-            customPath: customPath!);
-      default:
-        return Container();
+          config: shapeConfig);
     }
+    if (shapeConfig is CustomConfig) {
+      return Custom(
+          size: rowShapeSize,
+          originalSize: shapeSize,
+          color: shapeColor,
+          depth: shapeDepth,
+          perspective: perspective,
+          offset: shapeOffset,
+          config: shapeConfig);
+    }
+    return Container();
   }
 }
 

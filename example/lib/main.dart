@@ -41,7 +41,13 @@ class ConfigureBackgroundPatternState extends State<ConfigureBackgroundPattern> 
         shapeDepth: _shapeDepth,
         containerDepth: _containerDepth,
         alignShapesVertical: true,
-        shapes: const [Shape.polygon, Shape.polygonOutlined, Shape.square, Shape.squareOutlined, Shape.starOutlined],
+        shapes: [
+          PolygonConfig(),
+          PolygonConfig(isOutlined: true),
+          SquareConfig(isOutlined: true),
+          StarConfig(),
+          StarConfig(isOutlined: true, innerCirclePoints: 7, innerRadius: 30, innerOuterRadiusRatio: 2, angleOffsetToCenter: 40)
+        ],
         margin: _margin,
         shapeColor: Colors.black12,
         child: Padding(
