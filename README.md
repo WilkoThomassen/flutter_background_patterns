@@ -59,7 +59,7 @@ Example:
 ```dart
 
 return PatternContainer(
-        shapes: const [Shape.square],
+        shapes: [SquareConfig()],
         shapeColor: Colors.black);
 
 ```
@@ -74,7 +74,12 @@ return PatternContainer(
         shapeDepth: 0.5,
         containerDepth: 0.2,
         alignShapesVertical: true,
-        shapes: const [Shape.square],
+        shapes: [
+          PolygonConfig(),
+          PolygonConfig(isOutlined: true),
+          StarConfig(),
+          StarConfig(isOutlined: true, innerCirclePoints: 7, innerRadius: 30, innerOuterRadiusRatio: 2, angleOffsetToCenter: 40)
+        ],
         shapeColor: Colors.green);
 
 ```

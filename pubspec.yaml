@@ -1,6 +1,6 @@
 name: background_patterns
 description: Package that enables you to implement glorious backgrounds with customizable patterns and shapes
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/WilkoThomassen/flutter_background_patterns
 
 environment:
