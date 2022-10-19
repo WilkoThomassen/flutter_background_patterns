@@ -51,33 +51,19 @@ class Star extends StatelessWidget {
     var points = 1 + config.innerCirclePoints * 2;
     for (int i = 0; i < points; i++) {
       var radius = i % 2 == 0 ? outerRadius : config.innerRadius;
-      var x =
-          center + cos(i * angle + config.angleOffsetToCenter - 0.3) * radius;
-      var y =
-          center + sin(i * angle + config.angleOffsetToCenter - 0.3) * radius;
+      var x = center + cos(i * angle + config.angleOffsetToCenter - 0.3159) * radius;
+      var y = center + sin(i * angle + config.angleOffsetToCenter - 0.3159) * radius;
       shapePath.add(Offset(x, y));
     }
 
     // resize for container depth (only if container depth is active)
-    List<Offset> starPath = originalSize != size
-        ? shapePath.resizeAll(originalSize: originalSize, transformSize: size)
-        : shapePath;
+    List<Offset> starPath = originalSize != size ? shapePath.resizeAll(originalSize: originalSize, transformSize: size) : shapePath;
 
     return CustomPaint(
         painter: config.isOutlined
             ? BaseShapePainter.stroke(
-                shapeSize: size,
-                shapeOffset: offset,
-                depth: depth,
-                perspective: perspective,
-                color: color,
-                shapePointLocations: starPath)
+                shapeSize: size, shapeOffset: offset, depth: depth, perspective: perspective, color: color, shapePointLocations: starPath)
             : BaseShapePainter(
-                shapeSize: size,
-                shapeOffset: offset,
-                depth: depth,
-                perspective: perspective,
-                color: color,
-                shapePointLocations: starPath));
+                shapeSize: size, shapeOffset: offset, depth: depth, perspective: perspective, color: color, shapePointLocations: starPath));
   }
 }

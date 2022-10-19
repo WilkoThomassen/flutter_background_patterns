@@ -12,6 +12,9 @@ extension ShapePointLocationExtension on Offset {
     // division by 2 is because depth correction is for one half (left or right) of the shape
     double correction = size * (depth / 2) * locationHeightFactor;
 
+    // if location is really close to the center, do not correct at all
+    if ((dx - (size / 2)).round() == 0) return this;
+
     // if location is in first half, correct to the right else correct to the left
     if (dx < (size / 2)) {
       return Offset(dx + correction, dy);
