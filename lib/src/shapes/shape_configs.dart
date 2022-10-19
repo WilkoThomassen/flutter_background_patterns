@@ -8,7 +8,11 @@ abstract class BaseShapeConfig {
 
 class StarConfig extends BaseShapeConfig {
   StarConfig(
-      {bool isOutlined = false, this.innerCirclePoints = 5, this.innerRadius = 25, this.innerOuterRadiusRatio = 2, this.angleOffsetToCenter = 0})
+      {bool isOutlined = false,
+      this.innerCirclePoints = 5,
+      this.innerRadius = 25,
+      this.innerOuterRadiusRatio = 2,
+      this.angleOffsetToCenter = 0})
       : super(isOutlined);
 
   final int innerCirclePoints;
@@ -27,7 +31,8 @@ class PolygonConfig extends BaseShapeConfig {
 }
 
 class CustomConfig extends BaseShapeConfig {
-  CustomConfig({bool isOutlined = false, required this.customPath}) : super(isOutlined);
+  CustomConfig({bool isOutlined = false, required this.customPath})
+      : super(isOutlined);
 
   /// determines the path that has will be drawn
   final List<Offset> customPath;

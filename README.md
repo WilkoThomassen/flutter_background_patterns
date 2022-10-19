@@ -11,7 +11,8 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-A Flutter package for making widgets with a pattern in the background
+A Flutter package for making widgets with a pattern in the background.
+background patterns can be placed anywhere whether it is the background of a page or for example on a button
 
 ## Preview
 

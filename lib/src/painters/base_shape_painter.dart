@@ -46,14 +46,18 @@ class BaseShapePainter extends CustomPainter {
     // transform point locations with depth and perspective dimensions
     List<Offset> transformedShape = [];
     for (Offset pointLocation in shapePointLocations) {
-      transformedShape.add(pointLocation.withDepth(depth: depth, size: shapeSize).withPerspective(perspective: perspective, size: shapeSize));
+      transformedShape.add(pointLocation
+          .withDepth(depth: depth, size: shapeSize)
+          .withPerspective(perspective: perspective, size: shapeSize));
     }
 
     // increasing on shapeOffset is because shapes points offsets are relative to the shape offset
-    path.moveTo(shapeOffset.dx + transformedShape.first.dx, shapeOffset.dy + transformedShape.first.dy);
+    path.moveTo(shapeOffset.dx + transformedShape.first.dx,
+        shapeOffset.dy + transformedShape.first.dy);
 
     for (int i = 1; i < transformedShape.length; i++) {
-      path.lineTo(shapeOffset.dx + transformedShape[i].dx, shapeOffset.dy + transformedShape[i].dy);
+      path.lineTo(shapeOffset.dx + transformedShape[i].dx,
+          shapeOffset.dy + transformedShape[i].dy);
     }
 
     canvas.drawPath(path, _paint);

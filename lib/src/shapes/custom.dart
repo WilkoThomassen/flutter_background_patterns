@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:background_patterns/extensions/shape_path_extension.dart';
 import 'package:background_patterns/src/painters/base_shape_painter.dart';
 import 'package:background_patterns/src/shapes/shape_configs.dart';
@@ -39,14 +37,26 @@ class Custom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // resize for container depth (only if container depth is active)
-    List<Offset> resizedCustomPath =
-        originalSize != size ? config.customPath.resizeAll(originalSize: originalSize, transformSize: size) : config.customPath;
+    List<Offset> resizedCustomPath = originalSize != size
+        ? config.customPath
+            .resizeAll(originalSize: originalSize, transformSize: size)
+        : config.customPath;
 
     return CustomPaint(
         painter: config.isOutlined
             ? BaseShapePainter.stroke(
-                shapeSize: size, shapeOffset: offset, depth: depth, perspective: perspective, color: color, shapePointLocations: resizedCustomPath)
+                shapeSize: size,
+                shapeOffset: offset,
+                depth: depth,
+                perspective: perspective,
+                color: color,
+                shapePointLocations: resizedCustomPath)
             : BaseShapePainter(
-                shapeSize: size, shapeOffset: offset, depth: depth, perspective: perspective, color: color, shapePointLocations: resizedCustomPath));
+                shapeSize: size,
+                shapeOffset: offset,
+                depth: depth,
+                perspective: perspective,
+                color: color,
+                shapePointLocations: resizedCustomPath));
   }
 }

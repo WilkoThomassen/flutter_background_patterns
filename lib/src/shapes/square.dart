@@ -48,7 +48,12 @@ class Square extends StatelessWidget {
     return CustomPaint(
         painter: config.isOutlined
             ? BaseShapePainter.stroke(
-                shapeSize: size, shapeOffset: offset, depth: depth, perspective: perspective, color: color, shapePointLocations: shapePointLocations)
+                shapeSize: size,
+                shapeOffset: offset,
+                depth: depth,
+                perspective: perspective,
+                color: color,
+                shapePointLocations: shapePointLocations)
             : BaseShapePainter(
                 shapeSize: size,
                 shapeOffset: offset,

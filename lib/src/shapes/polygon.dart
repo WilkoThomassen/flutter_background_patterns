@@ -46,7 +46,8 @@ class Polygon extends StatelessWidget {
     final center = size / 2;
 
     // build up a polygon
-    Offset startPoint = Offset(radius * cos(radians) + center, radius * sin(radians) + center);
+    Offset startPoint =
+        Offset(radius * cos(radians) + center, radius * sin(radians) + center);
     shapePointLocations.add(startPoint);
     for (int i = 1; i <= config.sides; i++) {
       double x = radius * cos(radians + angle * i) + center;
