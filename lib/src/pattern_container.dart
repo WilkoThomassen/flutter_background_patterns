@@ -31,14 +31,17 @@ class PatternContainer extends StatelessWidget {
   /// margin between shapes on a row
   final double shapeSpacing;
 
-  // containers padding
+  /// containers padding
   final EdgeInsets padding;
 
-  // containers margin
+  /// containers margin
   final EdgeInsets margin;
 
-  // decoration
+  /// decoration
   final Decoration? decoration;
+
+  /// clipbehaviour
+  final Clip? clipBehaviour;
 
   /// sets the shape aligned vertically
   /// when false, the uneven rows will start with a half-shape margin
@@ -58,6 +61,7 @@ class PatternContainer extends StatelessWidget {
       this.padding = EdgeInsets.zero,
       this.margin = EdgeInsets.zero,
       this.decoration,
+      this.clipBehaviour,
       this.shapeSize = 30,
       this.shapeDepth = 0,
       this.containerDepth = 0,
@@ -71,7 +75,7 @@ class PatternContainer extends StatelessWidget {
           margin: margin,
           padding: padding,
           decoration: decoration,
-          clipBehavior: Clip.antiAlias,
+          clipBehavior: clipBehaviour ?? Clip.none,
           child: Stack(
             children: [_getShapesStack(constraints.maxWidth, constraints.maxHeight), child],
           ));

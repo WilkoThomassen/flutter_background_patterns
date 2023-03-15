@@ -42,6 +42,7 @@ class ConfigureBackgroundPatternState extends State<ConfigureBackgroundPattern> 
           color: Colors.black12,
           borderRadius: BorderRadius.circular(50),
         ),
+        clipBehaviour: Clip.antiAlias,
         shapeSize: _shapeSize,
         perspective: _perspective,
         shapeDepth: _shapeDepth,

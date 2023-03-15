@@ -1,3 +1,7 @@
+## 0.0.8
+
+* Clipbehaviour added
+
 ## 0.0.7
 
 * Container properties added to set padding, margin and decoration
