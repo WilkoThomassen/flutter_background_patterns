@@ -23,12 +23,10 @@ class ConfigureBackgroundPattern extends StatefulWidget {
   const ConfigureBackgroundPattern({super.key});
 
   @override
-  ConfigureBackgroundPatternState createState() =>
-      ConfigureBackgroundPatternState();
+  ConfigureBackgroundPatternState createState() => ConfigureBackgroundPatternState();
 }
 
-class ConfigureBackgroundPatternState
-    extends State<ConfigureBackgroundPattern> {
+class ConfigureBackgroundPatternState extends State<ConfigureBackgroundPattern> {
   double _shapeSize = 80;
   double _margin = 20;
   double _shapeDepth = 0.0;
@@ -38,6 +36,12 @@ class ConfigureBackgroundPatternState
   @override
   Widget build(BuildContext context) {
     return PatternContainer(
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.black12,
+          borderRadius: BorderRadius.circular(50),
+        ),
         shapeSize: _shapeSize,
         perspective: _perspective,
         shapeDepth: _shapeDepth,
@@ -48,14 +52,9 @@ class ConfigureBackgroundPatternState
           PolygonConfig(isOutlined: true),
           SquareConfig(isOutlined: true),
           StarConfig(),
-          StarConfig(
-              isOutlined: true,
-              innerCirclePoints: 7,
-              innerRadius: 24,
-              innerOuterRadiusRatio: 2,
-              angleOffsetToCenter: 40)
+          StarConfig(isOutlined: true, innerCirclePoints: 7, innerRadius: 24, innerOuterRadiusRatio: 2, angleOffsetToCenter: 40)
         ],
-        margin: _margin,
+        shapeSpacing: _margin,
         shapeColor: Colors.black12,
         child: Padding(
             padding: const EdgeInsets.all(40),

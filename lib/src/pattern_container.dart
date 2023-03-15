@@ -29,7 +29,16 @@ class PatternContainer extends StatelessWidget {
   final double perspective;
 
   /// margin between shapes on a row
-  final double margin;
+  final double shapeSpacing;
+
+  // containers padding
+  final EdgeInsets padding;
+
+  // containers margin
+  final EdgeInsets margin;
+
+  // decoration
+  final Decoration? decoration;
 
   /// sets the shape aligned vertically
   /// when false, the uneven rows will start with a half-shape margin
@@ -45,7 +54,10 @@ class PatternContainer extends StatelessWidget {
       required this.shapeColor,
       required this.shapes,
       this.customPath,
-      this.margin = 5,
+      this.shapeSpacing = 5,
+      this.padding = EdgeInsets.zero,
+      this.margin = EdgeInsets.zero,
+      this.decoration,
       this.shapeSize = 30,
       this.shapeDepth = 0,
       this.containerDepth = 0,
@@ -55,12 +67,14 @@ class PatternContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      return Stack(
-        children: [
-          _getShapesStack(constraints.maxWidth, constraints.maxHeight),
-          child
-        ],
-      );
+      return Container(
+          margin: margin,
+          padding: padding,
+          decoration: decoration,
+          clipBehavior: Clip.antiAlias,
+          child: Stack(
+            children: [_getShapesStack(constraints.maxWidth, constraints.maxHeight), child],
+          ));
     });
   }
 
@@ -70,8 +84,7 @@ class PatternContainer extends StatelessWidget {
     List<Widget> shapes = [];
 
     for (int ri = 0; ri < rows; ri++) {
-      double rowShapeSize = shapeSize.withContainerDepth(
-          depth: containerDepth, row: ri, rows: rows);
+      double rowShapeSize = shapeSize.withContainerDepth(depth: containerDepth, row: ri, rows: rows);
       int columns = (width / rowShapeSize).round();
       for (int ci = 0; ci < columns; ci++) {
         shapes.add(_getShape(ri, ci, rowShapeSize));
@@ -84,34 +97,17 @@ class PatternContainer extends StatelessWidget {
   Widget _getShape(int rowIndex, int columnIndex, double rowShapeSize) {
     // this margin sets a space for every uneven row to ensure that shapes are not aligned vertically
 
-    final double unAlignVerticalMargin =
-        !alignShapesVertical && rowIndex % 2 == 0 ? rowShapeSize / 2 : 0;
+    final double unAlignVerticalMargin = !alignShapesVertical && rowIndex % 2 == 0 ? rowShapeSize / 2 : 0;
     final Offset shapeOffset = Offset(
-        (margin +
-            unAlignVerticalMargin +
-            columnIndex * (rowShapeSize + margin) -
-            shapeSize),
-        rowIndex * (rowShapeSize + margin));
+        (shapeSpacing + unAlignVerticalMargin + columnIndex * (rowShapeSize + shapeSpacing) - shapeSize), rowIndex * (rowShapeSize + shapeSpacing));
     final shapeIndex = columnIndex % shapes.length;
     BaseShapeConfig shapeConfig = shapes[shapeIndex];
 
     if (shapeConfig is SquareConfig) {
-      return Square(
-          size: rowShapeSize,
-          color: shapeColor,
-          depth: shapeDepth,
-          perspective: perspective,
-          offset: shapeOffset,
-          config: shapeConfig);
+      return Square(size: rowShapeSize, color: shapeColor, depth: shapeDepth, perspective: perspective, offset: shapeOffset, config: shapeConfig);
     }
     if (shapeConfig is PolygonConfig) {
-      return Polygon(
-          size: rowShapeSize,
-          color: shapeColor,
-          depth: shapeDepth,
-          perspective: perspective,
-          offset: shapeOffset,
-          config: shapeConfig);
+      return Polygon(size: rowShapeSize, color: shapeColor, depth: shapeDepth, perspective: perspective, offset: shapeOffset, config: shapeConfig);
     }
     if (shapeConfig is StarConfig) {
       return Star(
@@ -138,8 +134,7 @@ class PatternContainer extends StatelessWidget {
 }
 
 extension ContainerDepthExtension on double {
-  double withContainerDepth(
-      {required double depth, required int row, required int rows}) {
+  double withContainerDepth({required double depth, required int row, required int rows}) {
     double rowFactor = 1 / rows;
     double rowCorrection = this * rowFactor * (rows - row);
 
