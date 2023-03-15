@@ -1,3 +1,7 @@
+## 0.0.9
+
+* Color added
+
 ## 0.0.8
 
 * Clipbehaviour added

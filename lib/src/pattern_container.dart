@@ -43,6 +43,9 @@ class PatternContainer extends StatelessWidget {
   /// clipbehaviour
   final Clip? clipBehaviour;
 
+  /// background color of the container
+  final Color? color;
+
   /// sets the shape aligned vertically
   /// when false, the uneven rows will start with a half-shape margin
   final bool alignShapesVertical;
@@ -64,6 +67,7 @@ class PatternContainer extends StatelessWidget {
       this.clipBehaviour,
       this.shapeSize = 30,
       this.shapeDepth = 0,
+      this.color,
       this.containerDepth = 0,
       this.perspective = 0,
       this.alignShapesVertical = false});
@@ -75,6 +79,7 @@ class PatternContainer extends StatelessWidget {
           margin: margin,
           padding: padding,
           decoration: decoration,
+          color: color,
           clipBehavior: clipBehaviour ?? Clip.none,
           child: Stack(
             children: [_getShapesStack(constraints.maxWidth, constraints.maxHeight), child],
